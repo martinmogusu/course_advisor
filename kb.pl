@@ -11,7 +11,7 @@ confirm_grade(Unit, Threshold):-
 
 % Confirms whether any of the units provided meets the
 % specified threshold
-%
+
 any_meets_threshold(Unit1, Unit2, Unit3, Unit4, Unit5, Threshold):-
     grade(Unit1, Unit1Points), Unit1Points >= Threshold;
     grade(Unit2, Unit2Points), Unit2Points >= Threshold;

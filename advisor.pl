@@ -24,7 +24,7 @@ clear:-
 prompt_grade(Subject, Title):-
     write("Enter "),
     write(Title),
-    write(" grade: "),
+    write(" points (1 - 12): "),
     read(Grade),
     assert(grade(Subject, Grade)).
 
