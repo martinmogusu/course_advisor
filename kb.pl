@@ -1,4 +1,21 @@
 :- dynamic grade/2.
+:- dynamic interest/2.
+
+%confirm the interest
+confirm_interest(Interest,Threshold):-
+	interest(Interest, InterestLevel), InterestLevel >= Threshold.
+
+
+% fields knowledge base.
+field(it):-
+	confirm_interest(technical, 5).
+field(general_science):-
+	confirm_interest(discovery, 8).
+field(social_science):-
+	confirm_interest(serving_people, 8).
+field(hospitality):-
+	confirm_interest(catering, 8).
+
 % Courses knowledge base.
 
 
@@ -32,50 +49,58 @@ can_take(hospitality_and_tourism_management):-
     any_meets_threshold(eng,kis,_,_,_,_, 10),
     confirm_grade(mat, 10),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9).
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(hospitality).
 
 can_take(catering_and_hotel_management):-
     any_meets_threshold(eng,kis,_,_,_,_, 10),
     confirm_grade(mat, 10),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9).
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(hospitality).
 
 can_take(development_studies):-
     any_meets_threshold(eng,kis,_,_,_,_, 9),
     any_meets_threshold(mat,bio,chem,phy,_,_, 9),
     any_meets_threshold(his,geo,cre,_,_,_, 8),
-    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8).
+    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
+    field(social_science).
 
 can_take(guidance_and_counselling):-
     any_meets_threshold(eng,kis,_,_,_,_, 9),
     any_meets_threshold(mat,bio,chem,phy,_,_, 9),
     any_meets_threshold(his,geo,cre,_,_,_, 8),
-    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8).
+    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
+    field(social_science).
 
 
 can_take(computer_science):-
     confirm_grade(mat, 12),
     confirm_grade(chem, 11),
     confirm_grade(phy, 10),
-    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ).
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(it).
 
 can_take(computer_technology):-
     confirm_grade(mat, 11),
     confirm_grade(chem, 8),
     confirm_grade(phy, 9),
-    any_meets_threshold(bio,chem,his,cre,geo,opt_unit, 9).
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit, 9),
+    field(it).
 
 
 can_take(analytic_chemistry):-
     confirm_grade(mat, 11),
     confirm_grade(phy, 11),
     confirm_grade(chem, 10),
-    any_meets_threshold(bio,geo,his,cre,opt_unit,_, 9).
+    any_meets_threshold(bio,geo,his,cre,opt_unit,_, 9),
+    field(general_science).
 
 can_take(bio_chemistry):-
     confirm_grade(bio, 11),
     confirm_grade(chem, 11),
     any_meets_threshold(mat,phy,_,_,_,_, 10),
-    any_meets_threshold(eng,kis,his,geo,cre,opt_unit, 9).
+    any_meets_threshold(eng,kis,his,geo,cre,opt_unit, 9),
+    field(general_science).
 
 
