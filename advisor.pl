@@ -34,4 +34,10 @@ menu:-
     prompt_grade(mat, "Mathematics"),
     prompt_grade(chem, "Chemistry"),
     prompt_grade(phy, "Physics"),
+    prompt_grade(bio, "Biology"),
+    prompt_grade(geo, "Geography"),
+    prompt_grade(his, "History"),
+    prompt_grade(cre, "CRE"),
+    prompt_grade(opt_unit, "optional unit"),
+
     save.
