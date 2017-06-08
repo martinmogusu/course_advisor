@@ -7,14 +7,49 @@ confirm_interest(Interest,Threshold):-
 
 
 % fields knowledge base.
-field(it):-
-	confirm_interest(technical, 5).
-field(general_science):-
-	confirm_interest(discovery, 8).
+field(law):-
+	confirm_interest(law,8),
+	confirm_interest(logic,5).
+field(business):-
+	confirm_interest(business, 5),
+	confirm_interest(management, 5).
 field(social_science):-
+	confirm_interest(social, 6).
+field(natural_resource):-
+	confirm_interest(outdoors, 6),
+	confirm_interest(discovery,5).
+field(special_needs):-
+	confirm_interest(catering,5).
+field(kiswahili):-
 	confirm_interest(serving_people, 8).
-field(hospitality):-
-	confirm_interest(catering, 8).
+field(engineering):-
+	confirm_interest(technical, 8),
+	confirm_interest(inventive,6).
+field(architecture):-
+	confirm_interest(arch, 8).
+field(it):-
+	confirm_interest(technical, 5),
+	confirm_interest(comp,5).
+field(agribusiness):-
+	confirm_interest(business, 5).
+field(science):-
+	confirm_interest(discovery, 8).
+field(finance):-
+	confirm_interest(business, 8).
+field(design):-
+	confirm_interest(art,6).
+field(sports):-
+	confirm_interest(outdoor, 8).
+field(medical):-
+	confirm_interest(medical, 8),
+        confirm_interest(tolerance,5).
+field(history):-
+	confirm_interest(serving_people, 8).
+field(agriculture):-
+	confirm_interest(catering,5),
+	confirm_interest(food,5).
+field(geography):-
+	confirm_interest(outdoor, 5).
 
 % Courses knowledge base.
 
@@ -45,20 +80,72 @@ should_take(X):-
 
 % Define conditions necessary to take given courses
 
-can_take(hospitality_and_tourism_management):-
-    any_meets_threshold(eng,kis,_,_,_,_, 10),
-    confirm_grade(mat, 10),
-    any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
-    field(hospitality).
+%cluster 1
+can_take(law):-
+    confirm_grade(eng, 12),
+    any_meets_threshold(mat,bio,chem,phy,_,_, 10),
+    any_meets_threshold(his,geo,cre,_,_,_, 10),
+    any_meets_threshold(kis,chem,his,cre,geo,opt_unit,10 ),
+    field(law).
 
+%cluster 2
 can_take(catering_and_hotel_management):-
     any_meets_threshold(eng,kis,_,_,_,_, 10),
     confirm_grade(mat, 10),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
     any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
-    field(hospitality).
+    field(business).
 
+can_take(entrepreneurship):-
+    any_meets_threshold(eng,kis,_,_,_,_, 10),
+    confirm_grade(mat, 10),
+    any_meets_threshold(bio,chem,phy,geo,his,cre,9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(business).
+
+can_take(commerce):-
+    any_meets_threshold(eng,kis,_,_,_,_, 10),
+    confirm_grade(mat, 11),
+    any_meets_threshold(bio,chem,phy,geo,his,cre,10),
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(business).
+
+can_take(hotel_and_hospitality_management):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    confirm_grade(mat, 8),
+    any_meets_threshold(bio,chem,phy,geo,his,cre,9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(business).
+
+can_take(procurement_and_contract_management):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    confirm_grade(mat, 8),
+    any_meets_threshold(bio,chem,phy,geo,his,cre,9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(business).
+
+can_take(procurement_and_supply_chain_management):-
+    any_meets_threshold(eng,kis,_,_,_,_, q),
+    confirm_grade(mat, 8),
+    any_meets_threshold(bio,chem,phy,geo,his,cre,9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(business).
+
+can_take(hospitality_and_tourism_management):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    confirm_grade(mat, 9),
+    any_meets_threshold(bio,chem,phy,geo,his,cre,9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(business).
+
+can_take(tourism_and_hotel_management):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    confirm_grade(mat, 9),
+    any_meets_threshold(bio,chem,phy,geo,his,cre,9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    field(business).
+
+%cluster 3
 can_take(development_studies):-
     any_meets_threshold(eng,kis,_,_,_,_, 9),
     any_meets_threshold(mat,bio,chem,phy,_,_, 9),
@@ -66,14 +153,196 @@ can_take(development_studies):-
     any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
     field(social_science).
 
-can_take(guidance_and_counselling):-
+can_take(arts):-
     any_meets_threshold(eng,kis,_,_,_,_, 9),
     any_meets_threshold(mat,bio,chem,phy,_,_, 9),
     any_meets_threshold(his,geo,cre,_,_,_, 8),
     any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
     field(social_science).
 
+can_take(education):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    any_meets_threshold(mat,bio,chem,phy,_,_, 9),
+    any_meets_threshold(his,geo,cre,_,_,_, 8),
+    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
+    field(social_science).
 
+can_take(mass_communication):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    any_meets_threshold(mat,bio,chem,phy,_,_, 9),
+    any_meets_threshold(his,geo,cre,_,_,_, 8),
+    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
+    field(social_science).
+
+can_take(journalism):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    any_meets_threshold(mat,bio,chem,phy,_,_, 9),
+    any_meets_threshold(his,geo,cre,_,_,_, 8),
+    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
+    field(social_work).
+
+can_take(broadcast_jornalism):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    any_meets_threshold(mat,bio,chem,phy,_,_, 9),
+    any_meets_threshold(his,geo,cre,_,_,_, 8),
+    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
+    field(social_science).
+
+can_take(criminology):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    any_meets_threshold(mat,bio,chem,phy,_,_, 9),
+    any_meets_threshold(his,geo,cre,_,_,_, 8),
+    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
+    field(social_science).
+
+can_take(phychology):-
+    any_meets_threshold(eng,kis,_,_,_,_, 9),
+    any_meets_threshold(mat,bio,chem,phy,_,_, 9),
+    any_meets_threshold(his,geo,cre,_,_,_, 8),
+    any_meets_threshold(bio,chem,phy,opt_unit,_,_, 8),
+    field(social_science).
+
+%cluster 4
+can_take(meteorology):-
+    confirm_grade(mat, 11),
+    confirm_grade(phy, 11),
+    any_meets_threshold(bio,chem,geo,_,_,_, 11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(natural_resource).
+
+can_take(geomatic_and_geospatial_information_systems):-
+    confirm_grade(mat, 11),
+    confirm_grade(phy, 11),
+    any_meets_threshold(bio,chem,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(natural_resource).
+
+can_take(geology):-
+    confirm_grade(mat, 11),
+    confirm_grade(phy, 11),
+    any_meets_threshold(bio,chem,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(natural_resource).
+
+can_take(geospatial_engineering):-
+    confirm_grade(mat, 11),
+    confirm_grade(phy, 11),
+    any_meets_threshold(bio,chem,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(natural_resource).
+
+can_take(astronomy_and_astrophysics):-
+    confirm_grade(mat, 11),
+    confirm_grade(phy, 11),
+    any_meets_threshold(bio,chem,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(natural_resource).
+
+
+%cluster 5
+can_take(special_needs_education):-
+    any_meets_threshold(eng,kis,_,_,_,_,9),
+    confirm_grade(bio, 10),
+    any_meets_threshold(his,cre,geo,_,_,_,9),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(special_needs).
+
+%cluster 6
+can_take(kiswahili):-
+    confirm_grade(kis, 11),
+    any_meets_threshold(mat,eng,_,_,_,_,11),
+    any_meets_threshold(his,cre,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,phy,cre,geo,opt_unit,10 ),
+    field(kiswahili).
+
+%cluster 7
+can_take(civil_engineering):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    confirm_grade(chem, 11),
+    any_meets_threshold(bio,his,cre,geo,opt_unit,_,11),
+    field(engineering).
+
+can_take(electrical_and_electronics_engineering):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    confirm_grade(chem, 11),
+    any_meets_threshold(bio,his,cre,geo,opt_unit,_,11),
+    field(engineering).
+
+can_take(mechanical_engineering):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    confirm_grade(chem, 11),
+    any_meets_threshold(bio,his,cre,geo,opt_unit,_,11),
+    field(engineering).
+
+can_take(electronic_and_computer_engineering):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    confirm_grade(chem, 11),
+    any_meets_threshold(bio,his,cre,geo,opt_unit,_,11),
+    field(engineering).
+
+can_take(medical_engineering):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    confirm_grade(chem, 11),
+    any_meets_threshold(bio,his,cre,geo,opt_unit,_,11),
+    field(engineering).
+
+can_take(marine_engineering):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    confirm_grade(chem, 11),
+    any_meets_threshold(bio,his,cre,geo,opt_unit,_,11),
+    field(engineering).
+
+can_take(control_and_instrumentation):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    confirm_grade(chem, 11),
+    any_meets_threshold(bio,his,cre,geo,opt_unit,_,11),
+    field(engineering).
+
+can_take(petroleum_engineering):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    confirm_grade(chem, 11),
+    any_meets_threshold(bio,his,cre,geo,opt_unit,_,11),
+    field(engineering).
+
+
+%cluster 8
+can_take(architecture):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    any_meets_threshold(his,cre,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,11),
+    field(architecture).
+
+can_take(architecture):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    any_meets_threshold(his,cre,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,11),
+    field(architecture).
+
+can_take(landscape_architecture):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    any_meets_threshold(his,cre,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,11),
+    field(architecture).
+
+can_take(construction_management):-
+    confirm_grade(mat, 12),
+    confirm_grade(phy, 11),
+    any_meets_threshold(his,cre,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,11),
+    field(architecture).
+
+%cluster 9
 can_take(computer_science):-
     confirm_grade(mat, 12),
     confirm_grade(chem, 11),
@@ -81,26 +350,361 @@ can_take(computer_science):-
     any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
     field(it).
 
-can_take(computer_technology):-
+can_take(mathematics_and_computer_science):-
     confirm_grade(mat, 11),
-    confirm_grade(chem, 8),
-    confirm_grade(phy, 9),
-    any_meets_threshold(bio,chem,his,cre,geo,opt_unit, 9),
+    confirm_grade(chem, 11),
+    confirm_grade(phy, 10),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
     field(it).
 
-
-can_take(analytic_chemistry):-
-    confirm_grade(mat, 11),
-    confirm_grade(phy, 11),
-    confirm_grade(chem, 10),
-    any_meets_threshold(bio,geo,his,cre,opt_unit,_, 9),
-    field(general_science).
-
-can_take(bio_chemistry):-
-    confirm_grade(bio, 11),
+can_take(computer_technology):-
+    confirm_grade(mat, 10),
     confirm_grade(chem, 11),
-    any_meets_threshold(mat,phy,_,_,_,_, 10),
-    any_meets_threshold(eng,kis,his,geo,cre,opt_unit, 9),
-    field(general_science).
+    confirm_grade(phy, 10),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(it).
 
+can_take(information_technology):-
+    confirm_grade(mat, 12),
+    confirm_grade(chem, 11),
+    confirm_grade(phy, 10),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(it).
 
+can_take(business_information_technology):-
+    confirm_grade(mat, 10),
+    confirm_grade(chem, 10),
+    confirm_grade(phy, 10),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(it).
+
+can_take(business_computing):-
+    confirm_grade(mat, 10),
+    confirm_grade(chem, 10),
+    confirm_grade(phy, 10),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(it).
+
+%cluster 10
+can_take(agribusiness_management):-
+    confirm_grade(mat, 12),
+    confirm_grade(bio, 11),
+    any_meets_threshold(phy,chem,_,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(agribusiness).
+
+can_take(agribusiness):-
+    confirm_grade(mat, 12),
+    confirm_grade(bio, 11),
+    any_meets_threshold(phy,chem,_,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(agribusiness).
+
+can_take(agricultural_economics):-
+    confirm_grade(mat, 12),
+    confirm_grade(bio, 11),
+    any_meets_threshold(phy,chem,_,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(agribusiness).
+
+can_take(agricultural_resource_management):-
+    confirm_grade(mat, 12),
+    confirm_grade(bio, 11),
+    any_meets_threshold(phy,chem,_,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(agribusiness).
+
+%cluster 11
+can_take(science):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(science).
+
+can_take(science_with_education):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(science).
+
+%cluster 12
+can_take(actuarial_science):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,11 ),
+    any_meets_threshold(his,cre,geo,_,_,_,11),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,11 ),
+    field(finance).
+
+can_take(economics):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(his,cre,geo,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(finance).
+
+can_take(finance):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(his,cre,geo,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(finance).
+
+can_take(industrial_mathematics):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(his,cre,geo,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(finance).
+
+can_take(real_estate):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(his,cre,geo,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(finance).
+
+can_take(statistics):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(his,cre,geo,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(finance).
+
+can_take(mathematics):-
+    confirm_grade(mat, 12),
+    any_meets_threshold(phy,chem,bio,_,_,_,10 ),
+    any_meets_threshold(his,cre,geo,_,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(finance).
+
+%cluster 13
+can_take(arts_interior_design):-
+    confirm_grade(chem, 12),
+    any_meets_threshold(phy,mat,_,_,_,_,10 ),
+    any_meets_threshold(bio,opt_unit,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(design).
+
+can_take(fashion_design):-
+    confirm_grade(chem, 12),
+    any_meets_threshold(phy,mat,_,_,_,_,10 ),
+    any_meets_threshold(bio,opt_unit,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(design).
+
+can_take(clothing_textile_and_interior_design):-
+    confirm_grade(chem, 12),
+    any_meets_threshold(phy,mat,_,_,_,_,10 ),
+    any_meets_threshold(bio,opt_unit,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(design).
+
+can_take(textile_and_apparel_design_and_fashion):-
+    confirm_grade(chem, 12),
+    any_meets_threshold(phy,mat,_,_,_,_,10 ),
+    any_meets_threshold(bio,opt_unit,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(design).
+
+%cluster 14
+can_take(physical_education_and_sports):-
+    confirm_grade(bio, 10),
+    confirm_grade(mat, 10),
+    any_meets_threshold(bio,chem,phy,his,geo,cre,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(sports).
+
+can_take(sports_science_and_management):-
+    confirm_grade(bio, 10),
+    confirm_grade(mat, 10),
+    any_meets_threshold(bio,chem,phy,his,geo,cre,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(sports).
+
+can_take(sports_management):-
+    confirm_grade(bio, 10),
+    confirm_grade(mat, 10),
+    any_meets_threshold(bio,chem,phy,his,geo,cre,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(sports).
+
+can_take(exercise_and_sport_science):-
+    confirm_grade(bio, 10),
+    confirm_grade(mat, 10),
+    any_meets_threshold(bio,chem,phy,his,geo,cre,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(sports).
+
+%cluster 15
+can_take(dental_surgery):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(medicine_and_surgery):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(pharmacy):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(forensic_science):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(nursing):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(clinical_medicine):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(microbiology):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(biology):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(biochemistry):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(physiotherapy):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(public_health):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(geonomic_science):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+can_take(radiography):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,_,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(medical).
+
+%cluster 16
+can_take(history_and_archaeology):-
+    confirm_grade(his, 10),
+    any_meets_threshold(eng,kis,_,_,_,_,10 ),
+    any_meets_threshold(mat,bio,chem,phy,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(history).
+
+can_take(history):-
+    confirm_grade(his, 10),
+    any_meets_threshold(eng,kis,_,_,_,_,10 ),
+    any_meets_threshold(mat,bio,chem,phy,_,_,10 ),
+    any_meets_threshold(bio,chem,his,cre,geo,opt_unit,10 ),
+    field(history).
+
+%cluster 17
+can_take(food_science_and_nutrition):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,geo,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(agriculture).
+
+can_take(food_science_and_technology):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,geo,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(agriculture).
+
+can_take(nutrition_and_diatetics):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,geo,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(agriculture).
+
+can_take(agriculture):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,geo,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(agriculture).
+
+can_take(horticulture):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,geo,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(agriculture).
+
+can_take(botany):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,geo,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(agriculture).
+
+can_take(animal_science):-
+    confirm_grade(bio, 10),
+    confirm_grade(chem, 10),
+    any_meets_threshold(mat,phy,geo,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(agriculture).
+
+%cluster 18
+can_take(geography):-
+    confirm_grade(geo, 10),
+    confirm_grade(mat, 10),
+    any_meets_threshold(bio,phy,chem,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(geography).
+
+can_take(environmental_planning_and_management):-
+    confirm_grade(geo, 10),
+    confirm_grade(mat, 10),
+    any_meets_threshold(bio,phy,chem,_,_,_,10 ),
+    any_meets_threshold(eng,kis,his,cre,geo,opt_unit,10 ),
+    field(geography).
