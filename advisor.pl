@@ -77,7 +77,7 @@ menu:-
     prompt_grade(opt_unit, "optional unit"),
 
     interest_instructions,
-    prompt_interest(logic, "doing logical activities?"),
+    prompt_interest(logic, "logic?"),
     prompt_interest(management, "management activities?"),
     prompt_interest(art, "painting and drawing?"),
     prompt_interest(medicine, "medical activities?"),
@@ -86,7 +86,7 @@ menu:-
     prompt_interest(business, "business activities ie economics,finance and marketing?"),
     prompt_interest(outdoor, "outdoor working area and activities?"),
     prompt_levels(tolerance, "stress tolerance?"),
-    prompt_interest(leader, "leadership?"),
+    prompt_interest(history, "historical information?"),
     prompt_interest(law, "legal and criminal justice?"),
     prompt_interest(inventive, "thinking and coming up with new ideas?"),
     prompt_interest(comp, "computing?"),
@@ -97,7 +97,5 @@ menu:-
     prompt_interest(serving_people, "serving people?"),
     prompt_interest(catering, "catering?"),
     prompt_interest(sport, "physical and sporting activities?"),
-
-
 
     save.

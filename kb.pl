@@ -5,54 +5,69 @@
 confirm_interest(Interest,Threshold):-
 	interest(Interest, InterestLevel), InterestLevel >= Threshold.
 
-
 % fields knowledge base.
 field(law):-
-	confirm_interest(law,8),
-	confirm_interest(logic,5).
+	confirm_interest(law,4),
+	confirm_interest(logic,2).
 field(business):-
-	confirm_interest(business, 5),
-	confirm_interest(management, 5).
+	confirm_interest(business, 4),
+	confirm_interest(management, 2),
+	confirm_interest(tolerance, 4).
 field(social_science):-
-	confirm_interest(social, 6).
+	confirm_interest(social, 3),
+	confirm_interest(art, 2).
 field(natural_resource):-
-	confirm_interest(outdoors, 6),
-	confirm_interest(discovery,5).
+	confirm_interest(outdoors, 3),
+	confirm_interest(discovery,2).
 field(special_needs):-
-	confirm_interest(catering,5).
+	confirm_interest(serving_people,4),
+	confirm_interest(tolerance, 3).
 field(kiswahili):-
-	confirm_interest(serving_people, 8).
+	confirm_interest(tolerance, 2).
 field(engineering):-
-	confirm_interest(technical, 8),
-	confirm_interest(inventive,6).
+	confirm_interest(technical, 3),
+	confirm_interest(inventive, 3),
+	confirm_interest(logical, 3).
 field(architecture):-
-	confirm_interest(arch, 8).
+	confirm_interest(arch, 4),
+	confirm_interest(inventive, 1).
 field(it):-
-	confirm_interest(technical, 5),
-	confirm_interest(comp,5).
+	confirm_interest(inventive, 1),
+	confirm_interest(technical, 2),
+	confirm_interest(comp,4).
 field(agribusiness):-
-	confirm_interest(business, 5).
+	confirm_interest(business, 2),
+	confirm_interest(food, 2).
 field(science):-
-	confirm_interest(discovery, 8).
+	confirm_interest(discovery, 4),
+	confirm_interest(perfectionist, 3).
 field(finance):-
-	confirm_interest(business, 8).
+	confirm_interest(business, 4),
+	confirm_interest(stress, 1).
 field(design):-
-	confirm_interest(art,6).
+	confirm_interest(art,4),
+	confirm_interest(inventive,2),
+	confirm_interest(discovery,1).
 field(sports):-
-	confirm_interest(outdoor, 8).
+	confirm_interest(outdoor, 3),
+	confirm_interest(sport,4),
+	confirm_interest(tolerance,2).
 field(medical):-
-	confirm_interest(medical, 8),
-        confirm_interest(tolerance,5).
+	confirm_interest(medical, 4),
+        confirm_interest(tolerance, 3),
+	confirm_interest(serving_people, 2),
+	confirm_interest(perfectionist, 4).
 field(history):-
-	confirm_interest(serving_people, 8).
+	confirm_interest(history, 4).
 field(agriculture):-
-	confirm_interest(catering,5),
-	confirm_interest(food,5).
+	confirm_interest(outdoor,3),
+	confirm_interest(food,3).
 field(geography):-
-	confirm_interest(outdoor, 5).
-
-% Courses knowledge base.
-
+	confirm_interest(outdoor, 3),
+	confirm_interest(discovery, 2).
+field(catering):-
+	confirm_interest(serving_people, 3),
+	confirm_interest(catering, 4).
 
 
 % Confirms if the grade for the specified unit meets the minimum
@@ -93,57 +108,51 @@ can_take(catering_and_hotel_management):-
     any_meets_threshold(eng,kis,_,_,_,_, 10),
     confirm_grade(mat, 10),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
-    field(business).
+    any_meets_threshold(bio,chem,geo,his,cre,opt_unit, 9),
+    field(catering).
 
 can_take(entrepreneurship):-
     any_meets_threshold(eng,kis,_,_,_,_, 10),
     confirm_grade(mat, 10),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt_unit, 9),
     field(business).
 
 can_take(commerce):-
     any_meets_threshold(eng,kis,_,_,_,_, 10),
     confirm_grade(mat, 11),
     any_meets_threshold(bio,chem,phy,geo,his,cre,10),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt_unit, 9),
     field(business).
 
 can_take(hotel_and_hospitality_management):-
     any_meets_threshold(eng,kis,_,_,_,_, 9),
     confirm_grade(mat, 8),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
-    field(business).
+    any_meets_threshold(bio,chem,geo,his,cre,opt_unit, 9),
+    field(catering).
 
 can_take(procurement_and_contract_management):-
     any_meets_threshold(eng,kis,_,_,_,_, 9),
     confirm_grade(mat, 8),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
+    any_meets_threshold(bio,chem,geo,his,cre,opt_unit, 9),
     field(business).
 
-can_take(procurement_and_supply_chain_management):-
-    any_meets_threshold(eng,kis,_,_,_,_, q),
-    confirm_grade(mat, 8),
-    any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
-    field(business).
 
 can_take(hospitality_and_tourism_management):-
     any_meets_threshold(eng,kis,_,_,_,_, 9),
     confirm_grade(mat, 9),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
-    field(business).
+    any_meets_threshold(bio,chem,geo,his,cre,opt_unit, 9),
+    field(catering).
 
 can_take(tourism_and_hotel_management):-
     any_meets_threshold(eng,kis,_,_,_,_, 9),
     confirm_grade(mat, 9),
     any_meets_threshold(bio,chem,phy,geo,his,cre,9),
-    any_meets_threshold(bio,chem,geo,his,cre,opt-unit, 9),
-    field(business).
+    any_meets_threshold(bio,chem,geo,his,cre,opt_unit, 9),
+    field(catering).
 
 %cluster 3
 can_take(development_studies):-
