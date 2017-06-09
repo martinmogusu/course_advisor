@@ -24,22 +24,47 @@ clear:-
     told.
 
 prompt_grade(Subject, Title):-
-    write("Enter "),
     write(Title),
-    write(" points (1 - 12): "),
+    write(": "),
     read(Grade),
     assert(grade(Subject, Grade)).
 
+% Prompts for the level of interest in specified area
 prompt_interest(Interest, Title):-
     write("What is your level of interest in "),
     write(Title),
-    write(" (1 - 5): "),
+    write(" "),
     read(Interest_Level),
     assert(interest(Interest, Interest_Level)).
+
+% Prompts for user levels of the specified attribute
+prompt_levels(Interest, Title):-
+    write("What is your level of "),
+    write(Title),
+    write(" "),
+    read(Levels),
+    assert(interest(Interest, Levels)).
+
+% Gives instructions  for entering grades
+grade_instructions:-
+    write("Enter the grades you got for the following subjects"),nl,
+    write("(A is 12 points, A- is 11 points etc...)"),nl,
+    write("If you did not do the subject enter 0 for the grade"),nl,nl.
+
+interest_instructions:-
+    nl,
+    write("Great, now you will answer a few more questions concerning yourself."),nl,
+    write("Kindly respond with numbers from 0 to 4:"),nl,nl,
+    write("0 - None"),nl,
+    write("1 - Low"),nl,
+    write("2 - Medium"),nl,
+    write("3 - High"),nl,
+    write("4 - Very high"),nl,nl.
 
 %Displays menu to user
 menu:-
     clear, /* Clear existing facts before asking for new ones */
+    grade_instructions,
     prompt_grade(mat, "Mathematics"),
     prompt_grade(eng, "English"),
     prompt_grade(kis, "Kiswahili"),
@@ -51,7 +76,7 @@ menu:-
     prompt_grade(cre, "CRE"),
     prompt_grade(opt_unit, "optional unit"),
 
-
+    interest_instructions,
     prompt_interest(logic, "doing logical activities?"),
     prompt_interest(management, "management activities?"),
     prompt_interest(art, "painting and drawing?"),
@@ -60,13 +85,13 @@ menu:-
     prompt_interest(arch, "construction design and management activities?"),
     prompt_interest(business, "business activities ie economics,finance and marketing?"),
     prompt_interest(outdoor, "outdoor working area and activities?"),
-    prompt_interest(tolerance, "stress tolerance?"),
+    prompt_levels(tolerance, "stress tolerance?"),
     prompt_interest(leader, "leadership?"),
     prompt_interest(law, "legal and criminal justice?"),
     prompt_interest(inventive, "thinking and coming up with new ideas?"),
     prompt_interest(comp, "computing?"),
     prompt_interest(social, "sociability?"),
-    prompt_interest(perfectionist, "attention to details?"),
+    prompt_levels(perfectionist, "attention to details?"),
     prompt_interest(technical, "doing technical activities?"),
     prompt_interest(discovery, "discovering new things?"),
     prompt_interest(serving_people, "serving people?"),
