@@ -90,7 +90,8 @@ any_meets_threshold(Unit1, Unit2, Unit3, Unit4, Unit5, Unit6, Threshold):-
 
 % Advices on courses one should take
 should_take(X):-
-    setof(X, can_take(X), Courses), member(X, Courses).
+    setof(X, can_take(X), Courses), member(X, Courses),
+    info(X).
 
 
 % Define conditions necessary to take given courses

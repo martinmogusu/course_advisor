@@ -4,6 +4,7 @@
 % Initialization procedures
 start:-
     reconsult('temp.pl'),nl,
+    reconsult('info.pl'),nl,
     reconsult('kb.pl'),nl,
     menu.
 
